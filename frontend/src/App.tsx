@@ -87,7 +87,7 @@ function App() {
             <p className='text-secondary'>Traffic Cam Image</p>
             {(selectedLoc !== null && locations.length > 0) && <TrafficCamImage loc={locations[selectedLoc]}/>}
             <p className='mt-3 text-secondary'>Weather Forecast</p>
-            <Weather />
+            {(selectedLoc !== null && locations.length > 0) && <Weather dateTime={`${date}T${time}`} loc={locations[selectedLoc]}/> }
           </Col>
         </Row>
       </Container>

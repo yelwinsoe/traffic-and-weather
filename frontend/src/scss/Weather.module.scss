@@ -1,4 +1,23 @@
-.card {
-  // margin-top: 58px;
-  // height: 400px;
+.weatherCardBody {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/clear.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  color: white;
+  text-align: center;
+}
+
+.partlyCloudy {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/cloudy.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  color: white;
+  text-align: center;
+}
+
+.heavyRain {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/heavy-rain.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  color: white;
+  text-align: center;
 }

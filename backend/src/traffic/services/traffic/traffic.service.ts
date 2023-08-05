@@ -23,11 +23,11 @@ export class TrafficService {
         locationWithCameras[i]['geo'] = localDB[latLong];
       } else {
         // Geo data does not exist in local var
-        // const url = `${process.env.ONEMAP_API}/public/revgeocode?location=${latLong}`;
-        // const geo = await axios.get(url, config);
-        // localDB[latLong] = geo.data.GeocodeInfo[0];
-        // // console.log(geo.data.GeocodeInfo);
-        // locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
+        const url = `${process.env.ONEMAP_API}/public/revgeocode?location=${latLong}`;
+        const geo = await axios.get(url, config);
+        localDB[latLong] = geo.data.GeocodeInfo[0];
+        // console.log(geo.data.GeocodeInfo);
+        locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
       }
     }
     return locationWithCameras;

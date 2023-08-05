@@ -13,6 +13,14 @@ export class WeatherController {
       ? dateTime + ':00'
       : new Date().toISOString().split('.')[0];
     const allWeather = await this.weatherService.fetchWeather(filterDateTime);
-    return await this.weatherService.findNearestLocation(allWeather, latLong);
+    const forecast = await this.weatherService.findNearestLocation(
+      allWeather,
+      latLong,
+    );
+    return {
+      forecast: forecast,
+      update_timestamp: allWeather.items[0].update_timestamp,
+      valid_period: allWeather.items[0].valid_period,
+    };
   }
 }
