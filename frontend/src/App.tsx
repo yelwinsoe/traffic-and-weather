@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './App.module.scss'
 
 import {
@@ -7,7 +7,6 @@ import {
   Image,
   Row,
   Col,
-  Form,
   InputGroup,
   FormControl
 } from 'react-bootstrap'
@@ -18,12 +17,14 @@ import Weather from './components/Weather'
 import TrafficCamImage from './components/TrafficCamImage'
 
 import { IndividualLocatonProps } from './components/IndividualLocation';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   
-  var newDate = new Date(); // Or the date you'd like converted.
+  // Constructing current date and time string
+  const newDate = new Date()
   const dateTimeString = new Date(newDate.getTime() - (newDate.getTimezoneOffset() * 60000)).toISOString()
   const dateString = dateTimeString.split('T')[0]
   const timeFullString = dateTimeString.split('T')[1]
@@ -41,9 +42,13 @@ function App() {
     const dateTime = date + 'T' + time;
     const getLocation = async () => {
       setIsLoading(true)
-      const url = `${process.env.REACT_APP_API_URL}/traffic?dateTime=${dateTime}`
-      const res = await axios.get(url)
-      setLocations(res.data)
+      try {
+        const url = `${process.env.REACT_APP_API_URL}/traffic?dateTime=${dateTime}`
+        const res = await axios.get(url)
+        setLocations(res.data)
+      } catch (err) {
+        console.log(err)
+      }
       setIsLoading(false)
       setShowSuccess(true)
     }

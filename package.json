@@ -1,0 +1,13 @@
+{
+  "name": "traffic-and-weather",
+  "version": "1.0.0",
+  "description": "Traffic Cam Images and Weather forecast of Singapore using data from Gov.sg.",
+  "main": "index.js",
+  "scripts": {
+    "backend": "cd backend && npm run start",
+    "frontend": "cd frontend && npm run start",
+    "start": "npm run backend & npm run frontend"
+  },
+  "author": "",
+  "license": "ISC"
+}
