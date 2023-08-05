@@ -18,6 +18,8 @@ import Weather from './components/Weather'
 import TrafficCamImage from './components/TrafficCamImage'
 
 import { IndividualLocatonProps } from './components/IndividualLocation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   
@@ -32,13 +34,19 @@ function App() {
   const [locations, setLocations] = useState<IndividualLocatonProps[]>([])
   const [selectedLoc, setSelectedLoc] = useState<number | null>(null)
 
+  const [isLoading, setIsLoading] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+
   useEffect(() => {
     const dateTime = date + 'T' + time;
     const getLocation = async () => {
+      setIsLoading(true)
       console.log(process.env)
       const url = `${process.env.REACT_APP_API_URL}/traffic?dateTime=${dateTime}`
       const res = await axios.get(url)
       setLocations(res.data)
+      setIsLoading(false)
+      setShowSuccess(true)
     }
     getLocation()
   }, [date, time])
@@ -46,6 +54,13 @@ function App() {
   useEffect(() => {
     setSelectedLoc(0)
   }, [locations])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSuccess(false)
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [showSuccess]);
 
   return (
     <>
@@ -77,6 +92,10 @@ function App() {
               <InputGroup.Text className='text-secondary'>Select a Time</InputGroup.Text>
               <FormControl type='time' defaultValue={time} onChange={(e) => { setTime(e.target.value) }} />
             </InputGroup>
+          </Col>
+          <Col>
+            {isLoading && <Image src='/loading.gif' className={styles.loading} />}
+            {showSuccess && <FontAwesomeIcon className={styles.success} icon={faCheckCircle} />}
           </Col>
         </Row>
         <Row>
