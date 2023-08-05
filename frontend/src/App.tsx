@@ -41,7 +41,6 @@ function App() {
     const dateTime = date + 'T' + time;
     const getLocation = async () => {
       setIsLoading(true)
-      console.log(process.env)
       const url = `${process.env.REACT_APP_API_URL}/traffic?dateTime=${dateTime}`
       const res = await axios.get(url)
       setLocations(res.data)
@@ -81,13 +80,13 @@ function App() {
       <hr />
       <Container fluid>
         <Row className='my-3'>
-          <Col md={3}>
+          <Col md={3} className='mt-1'>
             <InputGroup>
               <InputGroup.Text className='text-secondary'>Select a Date</InputGroup.Text>
               <FormControl type='date' defaultValue={date} max={dateString} onChange={(e) => { setDate(e.target.value) }} />
             </InputGroup>
           </Col>
-          <Col md={3}>
+          <Col md={3} className='mt-1'>
             <InputGroup>
               <InputGroup.Text className='text-secondary'>Select a Time</InputGroup.Text>
               <FormControl type='time' defaultValue={time} onChange={(e) => { setTime(e.target.value) }} />
@@ -103,10 +102,10 @@ function App() {
             <Location locations={locations} selectedLoc={selectedLoc} setSelectedLoc={setSelectedLoc}/>
           </Col>
           <Col md={4} xs={12}>
-            <p className='text-secondary'>Traffic Cam Image</p>
-            {(selectedLoc !== null && locations.length > 0) && <TrafficCamImage loc={locations[selectedLoc]}/>}
-            <p className='mt-3 text-secondary'>Weather Forecast</p>
+            <p className='text-secondary'>Weather Forecast</p>
             {(selectedLoc !== null && locations.length > 0) && <Weather dateTime={`${date}T${time}`} loc={locations[selectedLoc]}/> }
+            <p className='mt-4 text-secondary'>Traffic Image</p>
+            {(selectedLoc !== null && locations.length > 0) && <TrafficCamImage loc={locations[selectedLoc]}/>}
           </Col>
         </Row>
       </Container>

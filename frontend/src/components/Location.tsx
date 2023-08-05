@@ -98,6 +98,7 @@ const Location = ({ locations, selectedLoc, setSelectedLoc }: LocationProps,) =>
           </div>
         </Tab>
       </Tabs>
+      <br />
     </>
   )
 }

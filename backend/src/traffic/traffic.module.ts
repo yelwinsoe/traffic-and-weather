@@ -4,7 +4,7 @@ import { TrafficService } from './services/traffic/traffic.service';
 
 @Module({
   controllers: [TrafficController],
-  providers: [TrafficService]
+  providers: [TrafficService],
 })
 export class TrafficModule implements OnModuleInit {
   constructor(private trafficService: TrafficService) {}
