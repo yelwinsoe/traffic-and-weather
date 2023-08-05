@@ -45,20 +45,20 @@ const Location = ({ locations, selectedLoc, setSelectedLoc }: LocationProps,) =>
     </>
   }
 
-  const position: LatLngTuple = [1.3515, 103.8647]
+  const position: LatLngTuple = [1.3508, 103.8482] // Bishan MRT
 
   return (
     <>
-      <p className='text-secondary mb-2'>Pick a location</p>
+      {/* <p className='text-secondary mb-2'>Pick a location</p> */}
       <Tabs
         defaultActiveKey="map"
         transition={true}
-        className="mb-3"
-        variant='underline'
+        // className="mt-2"
+        variant='tabs'
       >
         <Tab eventKey="map" title={<MapTitle />}>
-          <div style={{ height: '450px' }}>
-            <MapContainer center={position} zoom={11} scrollWheelZoom={true} style={{ height: '450px' }}>
+          <div>
+            <MapContainer center={position} zoom={12} scrollWheelZoom={true} className={styles.mapContainer}>
               <TileLayer url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png" />
               {locations.map((loc: IndividualLocatonProps, i: number) => {
                 if ('geo' in loc) {

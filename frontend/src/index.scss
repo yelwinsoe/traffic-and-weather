@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
 
 // Bootstrap config
-$primary: #6253E8;
+$primary: #DF2573;
 
 @import '~bootstrap/scss/bootstrap';
 
 html, body {
   font-family: 'Lunasima', sans-serif;
+  background-color: #FCFCFC;
+}
+
+hr {
+  border: 1px solid #ddd;
+  margin: 0;
 }

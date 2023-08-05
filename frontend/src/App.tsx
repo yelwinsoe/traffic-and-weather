@@ -4,10 +4,11 @@ import styles from './App.module.scss'
 import {
   Container,
   Navbar,
+  Image,
   Row,
   Col,
   Form,
-  FormGroup,
+  InputGroup,
   FormControl
 } from 'react-bootstrap'
 import axios from 'axios';
@@ -48,48 +49,49 @@ function App() {
 
   return (
     <>
-      <Navbar bg="light" data-bs-theme="white">
-        <Container>
+      <Navbar bg="white" data-bs-theme="white">
+        <Container fluid>
           <Navbar.Brand>
             <img
               alt=""
-              src="/logo.png"
+              src="logo.png"
               width="30"
               height="30"
               className="d-inline-block align-top"
             /> &nbsp;
-            Traffic Cam Images and Weather
+            Traffic Images and Weather
           </Navbar.Brand>
         </Container>
       </Navbar>
-      <Container className='mt-4'>
-        <Row>
-          <Col md={3} xs={6}>
-            <FormGroup>
-              <Form.Label className='text-secondary'>Select a Date</Form.Label>
+      <hr />
+      <Container fluid>
+        <Row className='my-3'>
+          <Col md={3}>
+            <InputGroup>
+              <InputGroup.Text className='text-secondary'>Select a Date</InputGroup.Text>
               <FormControl type='date' defaultValue={date} max={dateString} onChange={(e) => { setDate(e.target.value) }} />
-            </FormGroup>
+            </InputGroup>
           </Col>
-          <Col md={3} xs={6}>
-            <FormGroup>
-              <Form.Label className='text-secondary'>Select a Time</Form.Label>
+          <Col md={3}>
+            <InputGroup>
+              <InputGroup.Text className='text-secondary'>Select a Time</InputGroup.Text>
               <FormControl type='time' defaultValue={time} onChange={(e) => { setTime(e.target.value) }} />
-            </FormGroup>
+            </InputGroup>
           </Col>
         </Row>
-        <Row className='mt-4'>
-          <Col md={8} xs={12}>
+        <Row>
+          <Col md={8} xs={12} className={styles.mapCol}>
             <Location locations={locations} selectedLoc={selectedLoc} setSelectedLoc={setSelectedLoc}/>
           </Col>
           <Col md={4} xs={12}>
-            <p className='mt-5 text-secondary'>Traffic Cam Image</p>
+            <p className='text-secondary'>Traffic Cam Image</p>
             {(selectedLoc !== null && locations.length > 0) && <TrafficCamImage loc={locations[selectedLoc]}/>}
             <p className='mt-3 text-secondary'>Weather Forecast</p>
             <Weather />
           </Col>
         </Row>
-        <br /><br />
       </Container>
+      <br /><br />
     </>
   );
 }

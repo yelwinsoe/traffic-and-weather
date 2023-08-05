@@ -1,5 +1,5 @@
 .locationList {
-  height: 60vh;
+  height: calc(100vh - 180px);
   overflow-x: auto;
 }
 
@@ -13,6 +13,10 @@
   margin-top: 5px;
   border: 1px solid #ddd;
   cursor: pointer;
-  background-color: #6253E8;
+  background-color: #DF2573;
   color: white;
+}
+
+.mapContainer {
+  height: calc(100vh - 180px);
 }
