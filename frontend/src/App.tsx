@@ -32,7 +32,7 @@ function App() {
           </Navbar.Brand>
         </Container>
       </Navbar>
-      <Container className='mt-3'>
+      <Container className='mt-4'>
         <Row>
           <Col md={3} xs={6}>
             <FormGroup>
@@ -47,17 +47,15 @@ function App() {
             </FormGroup>
           </Col>
         </Row>
-        <Row className='mt-3'>
-          <Col md={8} xs={12}>
+        <Row className='mt-4'>
+          <Col md={9} xs={12}>
             <Location />
           </Col>
-          <Col md={4} xs={12}>
+          <Col md={3} xs={12}>
+            <p className='mt-5 text-secondary'>Weather Forecast</p>
             <Weather />
-          </Col>
-        </Row>
-        <Row className='mt-3'>
-          <Col>
-            <h4>Traffic Cam Image</h4>
+            <br />
+            <p className='text-secondary'>Traffic Cam Image</p>
             <TrafficCamImage />
           </Col>
         </Row>

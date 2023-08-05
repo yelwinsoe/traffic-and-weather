@@ -10,6 +10,7 @@ const Weather = () => {
   return <Card className={styles.card}>
     <Card.Body>
       <h3>63 Degree</h3>
+      <br /><br />
     </Card.Body>
   </Card>
 }

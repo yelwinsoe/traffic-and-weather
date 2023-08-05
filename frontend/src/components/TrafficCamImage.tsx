@@ -6,7 +6,7 @@ import {
 
 const TrafficCamImage = () => {
   return <div>
-    <Image src='https://images.data.gov.sg/api/traffic-images/2023/08/48f0f575-aa5b-4093-a2bb-f76b0d1245ce.jpg' alt='Lakeside' />
+    <Image fluid src='https://images.data.gov.sg/api/traffic-images/2023/08/48f0f575-aa5b-4093-a2bb-f76b0d1245ce.jpg' height={240} width={320} alt='Lakeside' />
   </div>
 }
 
