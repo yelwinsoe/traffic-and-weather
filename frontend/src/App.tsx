@@ -1,12 +1,19 @@
 import React from 'react';
-import './App.scss';
+import styles from './App.module.scss'
 
 import {
   Container,
   Navbar,
   Row,
-  Col
+  Col,
+  Form,
+  FormGroup,
+  FormControl
 } from 'react-bootstrap'
+
+import Location from './components/Location'
+import Weather from './components/Weather'
+import TrafficCamImage from './components/TrafficCamImage'
 
 function App() {
   return (
@@ -25,6 +32,37 @@ function App() {
           </Navbar.Brand>
         </Container>
       </Navbar>
+      <Container className='mt-3'>
+        <Row>
+          <Col md={3} xs={6}>
+            <FormGroup>
+              <Form.Label>Select a Date</Form.Label>
+              <FormControl type='date' />
+            </FormGroup>
+          </Col>
+          <Col md={3} xs={6}>
+            <FormGroup>
+              <Form.Label>Select a Time</Form.Label>
+              <FormControl type='time' />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row className='mt-3'>
+          <Col md={8} xs={12}>
+            <Location />
+          </Col>
+          <Col md={4} xs={12}>
+            <Weather />
+          </Col>
+        </Row>
+        <Row className='mt-3'>
+          <Col>
+            <h4>Traffic Cam Image</h4>
+            <TrafficCamImage />
+          </Col>
+        </Row>
+        <br /><br />
+      </Container>
     </>
   );
 }
