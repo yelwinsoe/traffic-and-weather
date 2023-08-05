@@ -6,7 +6,7 @@ A website to show traffic image and weather of different part of Singapore.
 ## Requirements
 Tech stack to use:
 - Backend: NestJs
-- Frontend: ReactJs
+- Frontend: ReactJs + TypeScript
 
 To use the following 2 APIs.
 
@@ -26,10 +26,10 @@ The weather card to be improve with more background images for different weather
 
 ## Backend decision
 ### Reverse geocoding
-Doing reverse geocoding take a long time especially if the list is long.
+- Doing reverse geocoding take a long time especially if the list is long.
 So I've decided to do it during the start of the application, on the NestJs module Init to be precise. It'll take a few seconds to start the application, once done the location API call are very fast. Saving in permanent storage such as Database is ideal.
 
-Some location might not be shown due to the OneMap couldn't find the geo data for that specifi lat and long.
+- Some location might not be shown due to the OneMap couldn't find the geo data for that specifi lat and long.
 
 ### .env
 I would never add a token in the .env file but this is for easy testing purpose for this specific case.
@@ -58,7 +58,7 @@ cd ..
 npm run start
 ```
 
-Backend server will take between 10 to 20 seconds to start due to the reverse geocoding process. By saving this data in the permanent database, this will not happend in the future.
+Backend server will take between 10 to 20 seconds to start due to the reverse geocoding process. By saving this data in the permanent database, this will not happen in the future.
 
 Open http://localhost:3000 on the browser.
 

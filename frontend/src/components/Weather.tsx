@@ -34,7 +34,7 @@ const Weather = ({ dateTime, loc }: Props) => {
   useEffect(() => {
     const getWeather = async () => {
       try {
-        const url = `${process.env.REACT_APP_API_URL}/weather?dateTime=${dateTime}&latLong=${loc.location.latitude},${loc.location.longitude}`;
+        const url = `${process.env.REACT_APP_API_URL}/weather?dateTime=${dateTime}&lat=${loc.location.latitude}&long=${loc.location.longitude}`;
         const res = await axios.get(url)
         setWea(res.data)
       } catch (err) {

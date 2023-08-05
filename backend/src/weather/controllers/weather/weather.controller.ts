@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, ParseFloatPipe, Query } from '@nestjs/common';
 import { WeatherService } from 'src/weather/services/weather/weather.service';
 
 @Controller('weather')
@@ -7,7 +7,8 @@ export class WeatherController {
   @Get()
   async getWeather(
     @Query('dateTime') dateTime: string,
-    @Query('latLong') latLong: string,
+    @Query('lat', ParseFloatPipe) lat: number,
+    @Query('long', ParseFloatPipe) long: number,
   ) {
     const filterDateTime = dateTime
       ? dateTime + ':00'
@@ -15,7 +16,8 @@ export class WeatherController {
     const allWeather = await this.weatherService.fetchWeather(filterDateTime);
     const forecast = await this.weatherService.findNearestLocation(
       allWeather,
-      latLong,
+      lat,
+      long,
     );
     return {
       forecast: forecast,

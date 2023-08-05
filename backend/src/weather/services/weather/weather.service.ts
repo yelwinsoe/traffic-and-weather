@@ -59,11 +59,13 @@ export class WeatherService {
     return weather.data;
   }
 
-  async findNearestLocation(allWeather: AllWeatherProps, latLong: string) {
+  async findNearestLocation(
+    allWeather: AllWeatherProps,
+    lat: number,
+    long: number,
+  ) {
     let nearest = Infinity;
     let nearestLocation = null;
-    const lat = latLong.split(',')[0] as unknown as number;
-    const long = latLong.split(',')[1] as unknown as number;
     // Find nearest location based on lat/long
     for (const aw of allWeather.area_metadata) {
       if (aw.label_location) {
