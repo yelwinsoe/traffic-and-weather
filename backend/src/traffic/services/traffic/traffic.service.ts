@@ -26,6 +26,7 @@ export class TrafficService {
         const url = `${process.env.ONEMAP_API}/public/revgeocode?location=${latLong}`;
         const geo = await axios.get(url, config);
         localDB[latLong] = geo.data.GeocodeInfo[0];
+        // console.log(geo.data.GeocodeInfo);
         locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
       }
     }

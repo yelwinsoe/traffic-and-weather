@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Tabs,
@@ -11,6 +11,8 @@ import { faList, faMap } from '@fortawesome/free-solid-svg-icons'
 import L from 'leaflet'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import type { LatLngTuple } from 'leaflet'
+import IndividualLocation from './IndividualLocation'
+import { IndividualLocatonProps } from './IndividualLocation'
 
 import styles from '../scss/Location.module.scss'
 
@@ -22,21 +24,6 @@ let DefaultIcon = L.icon({
   shadowUrl: iconShadow
 });
 L.Marker.prototype.options.icon = DefaultIcon;
-
-interface GeoProps {
-  BUILDINGNAME: string
-  ROAD: string
-}
-
-interface LatLongProps {
-  latitude: number
-  longitude: number
-}
-export interface IndividualLocatonProps {
-  geo: GeoProps
-  timestamp: string
-  location: LatLongProps
-}
 
 interface LocationProps {
   locations: IndividualLocatonProps[]
@@ -56,11 +43,19 @@ const Location = ({locations}: LocationProps) => {
     </>
   }
 
-  const position: LatLngTuple = [1.2868108, 103.8545349]
+  const [selectedLoc, setSelectedLoc] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (selectedLoc !== null) {
+      console.log(locations[selectedLoc])
+    }
+  }, [selectedLoc, locations])
+
+  const position: LatLngTuple = [1.3499, 103.8734]
 
   return (
     <>
-      <p className='text-secondary'>Pick a location</p>
+      <p className='text-secondary mb-2'>Pick a location</p>
       <Tabs
         defaultActiveKey="map"
         transition={true}
@@ -69,15 +64,18 @@ const Location = ({locations}: LocationProps) => {
       >
         <Tab eventKey="map" title={<MapTitle />}>
           <div style={{ height: '400px' }}>
-            <MapContainer center={position} zoom={11} scrollWheelZoom={false} style={{ height: '400px' }}>
+            <MapContainer center={position} zoom={11} scrollWheelZoom={true} style={{ height: '400px' }}>
               <TileLayer url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png" />
               {locations.map((loc: IndividualLocatonProps, i: number) => {
-                return <Marker position={[loc.location.latitude,  loc.location.longitude]} key={i}>
-                <Popup>
-                  <p>{loc.geo?.BUILDINGNAME}</p>
-                  <p>{loc.geo?.ROAD}</p>
-                </Popup>
-              </Marker>
+                if ('geo' in loc) {
+                  return <Marker position={[loc.location.latitude,  loc.location.longitude]} key={i}>
+                  <Popup>
+                    {<IndividualLocation loc={loc} />}
+                  </Popup>
+                </Marker>
+                } else {
+                  return ''
+                }
               })}
             </MapContainer>
           </div>
@@ -85,12 +83,17 @@ const Location = ({locations}: LocationProps) => {
         <Tab eventKey="list" title={<ListTitle />}>
           <div className={styles.locationList}>
             {locations.map((loc: IndividualLocatonProps, i: number) => {
-              return <Card key={i} className='mb-1'>
-                <Card.Body>
-                  <p className='mb-0'><strong className='fs-5'>{loc.geo?.ROAD}</strong> <br /> <small className='text-secondary'>{loc.geo?.BUILDINGNAME}</small></p>
-                  <small>{loc.location.latitude}</small>
-                </Card.Body>
-              </Card>
+              if ('geo' in loc) {
+                return <Card key={i} className={selectedLoc === i ? styles.selectedLocation : styles.location} onClick={() => {
+                  setSelectedLoc(i)
+                }}>
+                  <Card.Body>
+                    <IndividualLocation loc={loc} />
+                  </Card.Body>
+                </Card>
+              } else {
+                return ''
+              }
             })}
           </div>
         </Tab>

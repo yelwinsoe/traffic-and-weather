@@ -16,7 +16,7 @@ import Location from './components/Location'
 import Weather from './components/Weather'
 import TrafficCamImage from './components/TrafficCamImage'
 
-import { IndividualLocatonProps } from './components/Location';
+import { IndividualLocatonProps } from './components/IndividualLocation';
 
 function App() {
   
@@ -61,13 +61,13 @@ function App() {
         <Row>
           <Col md={3} xs={6}>
             <FormGroup>
-              <Form.Label>Select a Date</Form.Label>
+              <Form.Label className='text-secondary'>Select a Date</Form.Label>
               <FormControl type='date' defaultValue={date} onChange={(e) => { setDate(e.target.value) }} />
             </FormGroup>
           </Col>
           <Col md={3} xs={6}>
             <FormGroup>
-              <Form.Label>Select a Time</Form.Label>
+              <Form.Label className='text-secondary'>Select a Time</Form.Label>
               <FormControl type='time' defaultValue={time} onChange={(e) => { setTime(e.target.value) }} />
             </FormGroup>
           </Col>

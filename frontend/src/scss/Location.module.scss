@@ -2,3 +2,17 @@
   height: 60vh;
   overflow-x: auto;
 }
+
+.location {
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.selectedLocation {
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background-color: #6253E8;
+  color: white;
+}
