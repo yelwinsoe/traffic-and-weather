@@ -48,16 +48,16 @@ function App() {
 
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar bg="light" data-bs-theme="white">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand>
             <img
               alt=""
               src="/logo.png"
               width="30"
               height="30"
               className="d-inline-block align-top"
-            />{' '}
+            /> &nbsp;
             Traffic Cam Images and Weather
           </Navbar.Brand>
         </Container>
