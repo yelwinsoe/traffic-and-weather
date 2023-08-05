@@ -8,10 +8,17 @@ interface LatLongProps {
   longitude: number
 }
 
+interface ImageMetadataProps {
+  height: number
+  width: number
+}
+
 export interface IndividualLocatonProps {
   geo: GeoProps
   timestamp: string
   location: LatLongProps
+  image: string
+  image_metadata: ImageMetadataProps
 }
 
 interface Props {

@@ -29,6 +29,7 @@ function App() {
   const [time, setTime] = useState<string>(hourMinute)
 
   const [locations, setLocations] = useState<IndividualLocatonProps[]>([])
+  const [selectedLoc, setSelectedLoc] = useState<number | null>(null)
 
   useEffect(() => {
     const dateTime = date + 'T' + time;
@@ -40,6 +41,10 @@ function App() {
     }
     getLocation()
   }, [date, time])
+
+  useEffect(() => {
+    setSelectedLoc(0)
+  }, [locations])
 
   return (
     <>
@@ -62,7 +67,7 @@ function App() {
           <Col md={3} xs={6}>
             <FormGroup>
               <Form.Label className='text-secondary'>Select a Date</Form.Label>
-              <FormControl type='date' defaultValue={date} onChange={(e) => { setDate(e.target.value) }} />
+              <FormControl type='date' defaultValue={date} max={dateString} onChange={(e) => { setDate(e.target.value) }} />
             </FormGroup>
           </Col>
           <Col md={3} xs={6}>
@@ -73,15 +78,14 @@ function App() {
           </Col>
         </Row>
         <Row className='mt-4'>
-          <Col md={9} xs={12}>
-            <Location locations={locations}/>
+          <Col md={8} xs={12}>
+            <Location locations={locations} selectedLoc={selectedLoc} setSelectedLoc={setSelectedLoc}/>
           </Col>
-          <Col md={3} xs={12}>
-            <p className='mt-5 text-secondary'>Weather Forecast</p>
+          <Col md={4} xs={12}>
+            <p className='mt-5 text-secondary'>Traffic Cam Image</p>
+            {(selectedLoc !== null && locations.length > 0) && <TrafficCamImage loc={locations[selectedLoc]}/>}
+            <p className='mt-3 text-secondary'>Weather Forecast</p>
             <Weather />
-            <br />
-            <p className='text-secondary'>Traffic Cam Image</p>
-            <TrafficCamImage />
           </Col>
         </Row>
         <br /><br />

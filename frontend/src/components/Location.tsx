@@ -27,9 +27,11 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 interface LocationProps {
   locations: IndividualLocatonProps[]
+  selectedLoc: number | null
+  setSelectedLoc: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Location = ({locations}: LocationProps) => {
+const Location = ({ locations, selectedLoc, setSelectedLoc }: LocationProps,) => {
 
   const ListTitle = () => {
     return <>
@@ -43,15 +45,7 @@ const Location = ({locations}: LocationProps) => {
     </>
   }
 
-  const [selectedLoc, setSelectedLoc] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (selectedLoc !== null) {
-      console.log(locations[selectedLoc])
-    }
-  }, [selectedLoc, locations])
-
-  const position: LatLngTuple = [1.3499, 103.8734]
+  const position: LatLngTuple = [1.3515, 103.8647]
 
   return (
     <>
@@ -60,19 +54,25 @@ const Location = ({locations}: LocationProps) => {
         defaultActiveKey="map"
         transition={true}
         className="mb-3"
-        variant='pills'
+        variant='underline'
       >
         <Tab eventKey="map" title={<MapTitle />}>
-          <div style={{ height: '400px' }}>
-            <MapContainer center={position} zoom={11} scrollWheelZoom={true} style={{ height: '400px' }}>
+          <div style={{ height: '450px' }}>
+            <MapContainer center={position} zoom={11} scrollWheelZoom={true} style={{ height: '450px' }}>
               <TileLayer url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png" />
               {locations.map((loc: IndividualLocatonProps, i: number) => {
                 if ('geo' in loc) {
-                  return <Marker position={[loc.location.latitude,  loc.location.longitude]} key={i}>
-                  <Popup>
-                    {<IndividualLocation loc={loc} />}
-                  </Popup>
-                </Marker>
+                  return <Marker
+                    position={[loc.location.latitude,  loc.location.longitude]}
+                    key={i}
+                    eventHandlers={{
+                      click: () => { setSelectedLoc(i) },
+                    }}
+                  >
+                    <Popup>
+                      {<IndividualLocation loc={loc} />}
+                    </Popup>
+                  </Marker>
                 } else {
                   return ''
                 }
