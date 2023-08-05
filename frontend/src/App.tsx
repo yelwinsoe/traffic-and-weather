@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './App.module.scss'
 
 import {
@@ -10,15 +10,40 @@ import {
   FormGroup,
   FormControl
 } from 'react-bootstrap'
+import axios from 'axios';
 
 import Location from './components/Location'
 import Weather from './components/Weather'
 import TrafficCamImage from './components/TrafficCamImage'
 
+import { IndividualLocatonProps } from './components/Location';
+
 function App() {
+  
+  var newDate = new Date(); // Or the date you'd like converted.
+  const dateTimeString = new Date(newDate.getTime() - (newDate.getTimezoneOffset() * 60000)).toISOString()
+  const dateString = dateTimeString.split('T')[0]
+  const timeFullString = dateTimeString.split('T')[1]
+  const hourMinute = timeFullString.split(':')[0] + ':' + timeFullString.split(':')[1]
+  const [date, setDate] = useState<string>(dateString)
+  const [time, setTime] = useState<string>(hourMinute)
+
+  const [locations, setLocations] = useState<IndividualLocatonProps[]>([])
+
+  useEffect(() => {
+    const dateTime = date + 'T' + time;
+    const getLocation = async () => {
+      console.log(process.env)
+      const url = `${process.env.REACT_APP_API_URL}/traffic?dateTime=${dateTime}`
+      const res = await axios.get(url)
+      setLocations(res.data)
+    }
+    getLocation()
+  }, [date, time])
+
   return (
     <>
-      <Navbar bg="primary" data-bs-theme="dark">
+      <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="#home">
             <img
@@ -37,19 +62,19 @@ function App() {
           <Col md={3} xs={6}>
             <FormGroup>
               <Form.Label>Select a Date</Form.Label>
-              <FormControl type='date' />
+              <FormControl type='date' defaultValue={date} onChange={(e) => { setDate(e.target.value) }} />
             </FormGroup>
           </Col>
           <Col md={3} xs={6}>
             <FormGroup>
               <Form.Label>Select a Time</Form.Label>
-              <FormControl type='time' />
+              <FormControl type='time' defaultValue={time} onChange={(e) => { setTime(e.target.value) }} />
             </FormGroup>
           </Col>
         </Row>
         <Row className='mt-4'>
           <Col md={9} xs={12}>
-            <Location />
+            <Location locations={locations}/>
           </Col>
           <Col md={3} xs={12}>
             <p className='mt-5 text-secondary'>Weather Forecast</p>

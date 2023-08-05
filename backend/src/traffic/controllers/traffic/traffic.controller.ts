@@ -7,8 +7,9 @@ export class TrafficController {
   @Get('/')
   getLocation(@Query('dateTime') dateTime: string) {
     const filterDateTime = dateTime
-      ? dateTime
+      ? dateTime + ':00'
       : new Date().toDateString().split('.')[0];
+    console.log(filterDateTime);
     return this.trafficService.fetchTrafficCamLocation(filterDateTime);
   }
 }

@@ -24,9 +24,9 @@ export class TrafficService {
       } else {
         // Geo data does not exist in local var
         const url = `${process.env.ONEMAP_API}/public/revgeocode?location=${latLong}`;
-        // const geo = await axios.get(url, config);
-        // localDB[latLong] = geo.data.GeocodeInfo[0];
-        // locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
+        const geo = await axios.get(url, config);
+        localDB[latLong] = geo.data.GeocodeInfo[0];
+        locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
       }
     }
     return locationWithCameras;

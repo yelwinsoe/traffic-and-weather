@@ -6,7 +6,7 @@ import {
   Card
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList, faMap, faMapMarker } from '@fortawesome/free-solid-svg-icons'
+import { faList, faMap } from '@fortawesome/free-solid-svg-icons'
 
 import L from 'leaflet'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -23,7 +23,26 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const Location = () => {
+interface GeoProps {
+  BUILDINGNAME: string
+  ROAD: string
+}
+
+interface LatLongProps {
+  latitude: number
+  longitude: number
+}
+export interface IndividualLocatonProps {
+  geo: GeoProps
+  timestamp: string
+  location: LatLongProps
+}
+
+interface LocationProps {
+  locations: IndividualLocatonProps[]
+}
+
+const Location = ({locations}: LocationProps) => {
 
   const ListTitle = () => {
     return <>
@@ -52,20 +71,24 @@ const Location = () => {
           <div style={{ height: '400px' }}>
             <MapContainer center={position} zoom={11} scrollWheelZoom={false} style={{ height: '400px' }}>
               <TileLayer url="https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png" />
-              <Marker position={position}>
+              {locations.map((loc: IndividualLocatonProps, i: number) => {
+                return <Marker position={[loc.location.latitude,  loc.location.longitude]} key={i}>
                 <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
+                  <p>{loc.geo?.BUILDINGNAME}</p>
+                  <p>{loc.geo?.ROAD}</p>
                 </Popup>
               </Marker>
+              })}
             </MapContainer>
           </div>
         </Tab>
         <Tab eventKey="list" title={<ListTitle />}>
           <div className={styles.locationList}>
-            {[0, 1, 2, 3, 4].map((i) => {
+            {locations.map((loc: IndividualLocatonProps, i: number) => {
               return <Card key={i} className='mb-1'>
                 <Card.Body>
-                  <p className='mb-0'><strong className='fs-4'>Lakeside</strong> <br /> <small className='text-secondary'>201 Boon Lay Wy, Singapore 649845</small></p>
+                  <p className='mb-0'><strong className='fs-5'>{loc.geo?.ROAD}</strong> <br /> <small className='text-secondary'>{loc.geo?.BUILDINGNAME}</small></p>
+                  <small>{loc.location.latitude}</small>
                 </Card.Body>
               </Card>
             })}
