@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
+
+import {
+  Container,
+  Navbar,
+  Row,
+  Col
+} from 'react-bootstrap'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar bg="primary" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="#home">
+            <img
+              alt=""
+              src="/logo.png"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            Traffic Cam Images and Weather
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+    </>
   );
 }
 
