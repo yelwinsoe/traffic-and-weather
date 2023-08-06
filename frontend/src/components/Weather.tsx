@@ -46,25 +46,26 @@ const Weather = ({ dateTime, loc }: Props) => {
 
   const getWeatherStyleClass = () => {
     let res = styles.weatherCardBody;
-    switch(wea?.forecast.forecast) {
-      case 'Partly Cloudy (Day)':
-        res = styles.partlyCloudy
-        break;
-      case 'Heavy Rain (Day)':
-        res = styles.heavyRain;
-        break;
+    if (wea?.forecast.forecast.includes('cloudy')) {
+      res = styles.cloudy
+    } else if (wea?.forecast.forecast.includes('sunny')) {
+      res = styles.sunny
+    } else if (wea?.forecast.forecast.includes('rain')) {
+      res = styles.rainy
+    } else {
+      res = styles.defaultWeather;
     }
     return res;
   }
 
   return <Card className={styles.card}>
     <Card.Body className={getWeatherStyleClass()}>
-      <br /><br /><br />
+      <br /><br />
       {wea !== null && <>
         <h3 className='fw-bold'>{wea.forecast.forecast}</h3>
         <small>{wea.forecast.area}</small>
       </>}
-      <br /><br /><br />
+      <br /><br />
       <small>Updated: {moment(wea?.update_timestamp).fromNow()}</small>
     </Card.Body>
   </Card>

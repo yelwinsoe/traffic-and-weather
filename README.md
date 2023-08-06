@@ -29,11 +29,13 @@ The weather card to be improve with more background images for different weather
 - Doing reverse geocoding take a long time especially if the list is long.
 So I've decided to do it during the start of the application, on the NestJs module Init to be precise. It'll take a few seconds to start the application, once done the location API call are very fast. Saving in permanent storage such as Database is ideal.
 
-- Some location might not be shown due to the OneMap couldn't find the geo data for that specifi lat and long.
+- Some location might not be shown due to the OneMap couldn't find the geo data for that specific lat and long. That could be solve by processing reverse geocoding in a seperate task using different map.
 
 ### .env
 I would never add a token in the .env file but this is for easy testing purpose for this specific case.
-ONEMAP_TOKEN in the env will be expire by 8 Aug.
+ONEMAP_TOKEN in the env will be expire by 8 Aug as token from OneMap only last for 3 days.
+
+In case token expiry, you may get a new token from here https://www.onemap.gov.sg/apidocs/register
 
 ## How to start the application
 Run the following command to start the website on local machine.

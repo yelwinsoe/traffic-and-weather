@@ -1,4 +1,4 @@
-.weatherCardBody {
+.defaultWeather {
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/clear.jpeg');
   background-repeat: no-repeat;
   background-size: cover; 
@@ -6,16 +6,24 @@
   text-align: center;
 }
 
-.partlyCloudy {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/cloudy.jpeg');
+.cloudy {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/cloudy.gif');
   background-repeat: no-repeat;
   background-size: cover; 
   color: white;
   text-align: center;
 }
 
-.heavyRain {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/heavy-rain.jpeg');
+.rainy {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../../public/heavy-rain.gif');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  color: white;
+  text-align: center;
+}
+
+.sunny {
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('../../public/sunny.gif');
   background-repeat: no-repeat;
   background-size: cover; 
   color: white;

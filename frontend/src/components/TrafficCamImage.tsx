@@ -3,7 +3,7 @@ import React from 'react'
 import {
   Image
 } from 'react-bootstrap'
-import { IndividualLocatonProps } from './IndividualLocation'
+import IndividualLocation, { IndividualLocatonProps } from './IndividualLocation'
 
 interface Props {
   loc: IndividualLocatonProps
@@ -11,7 +11,8 @@ interface Props {
 
 const TrafficCamImage = ({ loc }: Props) => {
   return <div style={{ width: '100%' }}>
-    <Image fluid src={loc.image} width="100%" height="auto" style={{ border: '1px solid #ddd' }} alt='Lakeside' />
+    <IndividualLocation loc={loc} />
+    <Image fluid src={loc.image} width="100%" height="auto" className='mt-2' alt={loc?.geo?.ROAD} />
   </div>
 }
 
