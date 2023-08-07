@@ -28,7 +28,9 @@ export class TrafficService {
       const latLong = `${locationWithCameras[i].location.latitude},${locationWithCameras[i].location.longitude}`;
       if (latLong in this.localDB) {
         // Geo data exist in local var
-        locationWithCameras[i]['geo'] = this.localDB[latLong];
+        if (this.localDB[latLong].ROAD) {
+          locationWithCameras[i]['geo'] = this.localDB[latLong];
+        }
       } else {
         newRecord = true;
         // Geo data does not exist in local var
@@ -36,7 +38,9 @@ export class TrafficService {
         const geo = await axios.get(url, config);
         this.localDB[latLong] = geo.data.GeocodeInfo[0] || {};
 
-        locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
+        if (geo.data.GeocodeInfo[0]) {
+          locationWithCameras[i]['geo'] = geo.data.GeocodeInfo[0];
+        }
       }
     }
 
