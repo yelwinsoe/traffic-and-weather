@@ -27,15 +27,15 @@ The weather card to be improve with more background images for different weather
 ## Backend decision
 ### Reverse geocoding
 - Doing reverse geocoding take a long time especially if the list is long.
-So I've decided to do it during the start of the application, on the NestJs module Init to be precise. It'll take a few seconds to start the application, once done the location API call are very fast. Saving in permanent storage such as Database is ideal.
+So I've decided to save it into a json file for this demo, preferably to be save in DB especially for production. New unseen location will be updated to the json file as the api is being called.
 
-- Some location might not be shown due to the OneMap couldn't find the geo data for that specific lat and long. That could be solve by processing reverse geocoding in a seperate task using different map.
+- Some location might not be shown due to the OneMap couldn't find the geo data for that specific lat and long. That could be solve by processing reverse geocoding in a seperate task using different map or enter road or building name manually.
 
 ### .env
 I would never add a token in the .env file but this is for easy testing purpose for this specific case.
 ONEMAP_TOKEN in the env will be expire by 8 Aug as token from OneMap only last for 3 days.
 
-In case token expiry, you may get a new token from here https://www.onemap.gov.sg/apidocs/register
+In case of token expiry, you may get a new token from here https://www.onemap.gov.sg/apidocs/register
 
 ## How to start the application
 Run the following command to start the website on local machine.
@@ -60,8 +60,32 @@ cd ..
 npm run start
 ```
 
-Backend server will take between 10 to 20 seconds to start due to the reverse geocoding process. By saving this data in the permanent database, this will not happen in the future.
-
 Open http://localhost:3000 on the browser.
 
-In case the browse open automatically, do refresh after 10/20 seconds about time the backend server started.
+
+## Testing
+Full unit testing and e2e testing for the backend is added.
+
+Check the folllowing files for unit testing
+
+- /src/traffic/controllers/traffic/traffic.controller.spec.ts
+- /src/traffic/services/traffic/traffic.service.spec.ts
+- /src/weather/controllers/weather/weather.controller.spec.ts
+- /src/weather/services/weather/weather.service.spec.ts
+
+Check the following files for e2e testing
+
+- /test/traffic.e2e-spec.ts
+- /test/weather.e2e-spec.ts
+
+Run the following command in the backend folder to initiate the test.
+
+### For unit testing
+```
+npm run test
+```
+
+## For e2e testing
+```
+npm run test:e2e
+```
