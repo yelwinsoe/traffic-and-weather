@@ -1,7 +1,7 @@
 # Traffice Images and Weather
 A website to show traffic image and weather of different part of Singapore.
 
-![Screenshot of the website](./screenshot.png "Screenshot of the website")
+![Screenshot of the website](./screenshot.png? "Screenshot of the website")
 
 ## Requirements
 Tech stack to use:
