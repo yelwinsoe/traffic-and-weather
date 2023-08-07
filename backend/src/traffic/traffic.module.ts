@@ -9,10 +9,8 @@ import { TrafficService } from './services/traffic/traffic.service';
 export class TrafficModule implements OnModuleInit {
   constructor(private trafficService: TrafficService) {}
   async onModuleInit() {
-    console.log('Getting geo data - reverse geocode started');
     await this.trafficService.fetchTrafficImageLocation(
       new Date().toISOString().split('.')[0],
     );
-    console.log('Getting geo data - reverse geocode done');
   }
 }

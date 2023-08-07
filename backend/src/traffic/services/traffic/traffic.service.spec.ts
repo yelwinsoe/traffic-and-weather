@@ -24,5 +24,5 @@ describe('TrafficService', () => {
     expect(locations.length).toBeGreaterThan(0);
     expect(locations[0].timestamp).toBeDefined();
     expect(locations[0].image).toBeDefined();
-  }, 60000); // Set a timeout of 1 minute because of reverse geocoding, this wouldn't be necessary in the future
+  });
 });

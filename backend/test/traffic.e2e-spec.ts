@@ -15,10 +15,11 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/traffic (GET)', async () => {
+    const res = await request(app.getHttpServer()).get('/traffic');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.length).toBeGreaterThan(0);
+    expect(res.body[0].timestamp).toBeDefined();
+    expect(res.body[0].image).toBeDefined();
   });
 });
