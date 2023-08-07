@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { TrafficService } from 'src/traffic/services/traffic/traffic.service';
+import { TrafficService } from '../../services/traffic/traffic.service';
 
 @Controller('traffic')
 export class TrafficController {
@@ -9,6 +9,6 @@ export class TrafficController {
     const filterDateTime = dateTime
       ? dateTime + ':00'
       : new Date().toISOString().split('.')[0];
-    return this.trafficService.fetchTrafficCamLocation(filterDateTime);
+    return this.trafficService.fetchTrafficImageLocation(filterDateTime);
   }
 }

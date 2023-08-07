@@ -1,5 +1,5 @@
 import { Controller, Get, ParseFloatPipe, Query } from '@nestjs/common';
-import { WeatherService } from 'src/weather/services/weather/weather.service';
+import { WeatherService } from '../../services/weather/weather.service';
 
 @Controller('weather')
 export class WeatherController {

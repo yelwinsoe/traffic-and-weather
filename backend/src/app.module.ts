@@ -3,8 +3,16 @@ import { ConfigModule } from '@nestjs/config';
 import { TrafficModule } from './traffic/traffic.module';
 import { WeatherModule } from './weather/weather.module';
 
+import configuration from './config/configuration';
+
 @Module({
-  imports: [ConfigModule.forRoot(), TrafficModule, WeatherModule],
+  imports: [
+    ConfigModule.forRoot({
+      load: [configuration]
+    }),
+    TrafficModule,
+    WeatherModule,
+  ],
   controllers: [],
   providers: [],
 })
