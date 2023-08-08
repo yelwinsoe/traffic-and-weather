@@ -11,7 +11,7 @@ Tech stack to use:
 To use the following 2 APIs.
 
 1. Traffic Images (https://data.gov.sg/dataset/traffic-images)
-2. Weather forecast (https://data.gov.sg/dataset/traffic-images)
+2. Weather forecast ((https://data.gov.sg/dataset/weather-forecast))
 
 ## Functional Requirements
 - To build a web app where a list of location to be shown and when the user click on a location, traffic image and weather information to be shown.
